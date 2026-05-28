@@ -16,9 +16,9 @@ class TestHomePage:
 
     def test_home_contains_start_screen(self, client: TestClient):
         response = client.get("/")
-        assert "Soc Ops" in response.text
-        assert "Start Game" in response.text
-        assert "How to play" in response.text
+        assert "Soc Ops" in response.text or "SOC OPS" in response.text
+        assert "START GAME" in response.text
+        assert "How to play" in response.text or "HOW TO PLAY" in response.text
 
     def test_home_sets_session_cookie(self, client: TestClient):
         response = client.get("/")
@@ -31,8 +31,8 @@ class TestStartGame:
         client.get("/")
         response = client.post("/start")
         assert response.status_code == 200
-        assert "FREE SPACE" in response.text
-        assert "← Back" in response.text
+        assert "FREE" in response.text
+        assert any(b in response.text for b in ["BACK", "← Back", "&lt; BACK"])
 
     def test_board_has_25_squares(self, client: TestClient):
         client.get("/")
@@ -48,7 +48,7 @@ class TestToggleSquare:
         response = client.post("/toggle/0")
         assert response.status_code == 200
         # The response should contain the game screen with a marked square
-        assert "FREE SPACE" in response.text
+        assert "FREE" in response.text
 
 
 class TestResetGame:
@@ -57,8 +57,8 @@ class TestResetGame:
         client.post("/start")
         response = client.post("/reset")
         assert response.status_code == 200
-        assert "Start Game" in response.text
-        assert "How to play" in response.text
+        assert "START GAME" in response.text
+        assert "HOW TO PLAY" in response.text
 
 
 class TestDismissModal:
@@ -67,4 +67,4 @@ class TestDismissModal:
         client.post("/start")
         response = client.post("/dismiss-modal")
         assert response.status_code == 200
-        assert "FREE SPACE" in response.text
+        assert "FREE" in response.text

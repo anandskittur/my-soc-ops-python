@@ -1,24 +1,50 @@
 <div id="game-container">
-<div class="flex flex-col items-center justify-center min-h-full p-6 bg-gray-50">
-    <div class="text-center max-w-sm">
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Soc Ops</h1>
-        <p class="text-lg text-gray-600 mb-8">Social Bingo</p>
+<div class="flex flex-col items-center justify-center min-h-full p-6">
+    <div class="text-center max-w-sm w-full animate-float-in">
 
-        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-8">
-            <h2 class="font-semibold text-gray-800 mb-3">How to play</h2>
-            <ul class="text-left text-gray-600 text-sm space-y-2">
-                <li>• Find people who match the questions</li>
-                <li>• Tap a square when you find a match</li>
-                <li>• Get 5 in a row to win!</li>
+        <!-- Logo -->
+        <div class="mb-6">
+            <p style="font-family: 'Press Start 2P', monospace; font-size: 0.55rem; color: var(--color-accent); letter-spacing: 0.2em; margin-bottom: 0.75rem;">- COMMUNITY EDITION -</p>
+            <h1 style="font-family: 'Press Start 2P', monospace; font-size: 1.6rem; line-height: 1.4; color: var(--color-primary);">SOC<br>OPS</h1>
+            <p style="font-family: 'VT323', monospace; font-size: 1.4rem; color: var(--color-text-muted); margin-top: 0.25rem;">SOCIAL BINGO</p>
+        </div>
+
+        <!-- Card -->
+        <div class="ticket p-6 mb-6">
+            <p style="font-family: 'Press Start 2P', monospace; font-size: 0.5rem; color: var(--color-primary); letter-spacing: 0.1em; margin-bottom: 1rem;">HOW TO PLAY</p>
+            <ul class="text-left space-y-2" style="font-family: 'VT323', monospace; font-size: 1.3rem; color: var(--color-text);">
+                <li style="display: flex; gap: 0.75rem;">
+                    <span style="color: var(--color-accent); flex-shrink: 0;">B&gt;</span>
+                    <span>Find people who match the prompts</span>
+                </li>
+                <li style="display: flex; gap: 0.75rem;">
+                    <span style="color: var(--color-accent); flex-shrink: 0;">I&gt;</span>
+                    <span>Tap a square when you find a match</span>
+                </li>
+                <li style="display: flex; gap: 0.75rem;">
+                    <span style="color: var(--color-accent); flex-shrink: 0;">N&gt;</span>
+                    <span>Get 5 in a row to win!</span>
+                </li>
             </ul>
         </div>
+
+        <input
+            id="player-name-input"
+            type="text"
+            name="player_name"
+            placeholder="Enter your name..."
+            maxlength="30"
+            autocomplete="off"
+            style="width: 100%; padding: 0.6rem 0.75rem; margin-bottom: 0.75rem; font-family: 'VT323', monospace; font-size: 1.3rem; background: var(--color-surface); border: 2px solid var(--color-primary); color: var(--color-text); outline: none; box-sizing: border-box;"
+        />
 
         <button
             hx-post="/start"
             hx-target="#game-container"
             hx-swap="outerHTML"
-            class="w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg active:bg-accent-light transition-colors">
-            Start Game
+            hx-include="#player-name-input"
+            class="btn-gold">
+            &gt; START GAME
         </button>
     </div>
 </div>

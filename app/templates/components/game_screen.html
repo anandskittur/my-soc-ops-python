@@ -1,27 +1,29 @@
 <div id="game-container">
-<div class="flex flex-col min-h-full bg-gray-50">
+<div class="flex flex-col min-h-full">
     <!-- Header -->
-    <header class="flex items-center justify-between p-3 bg-white border-b border-gray-200">
+    <header class="flex items-center justify-between p-3" style="background: var(--color-primary); border-bottom: 3px solid #1a1a1a; box-shadow: 0 3px 0 #1a1a1a;">
         <button
             hx-post="/reset"
             hx-target="#game-container"
             hx-swap="outerHTML"
-            class="text-gray-500 text-sm px-3 py-1.5 rounded active:bg-gray-100">
-            ← Back
+            class="btn-ghost" style="border-color: rgba(255,255,255,0.4); color: rgba(255,253,245,0.8);">
+            &lt; BACK
         </button>
-        <h1 class="font-bold text-gray-900">Soc Ops</h1>
-        <div class="w-16"></div>
+        <h1 style="font-family: 'Press Start 2P', monospace; font-size: 0.7rem; color: #fffdf5; letter-spacing: 0.1em;">SOC OPS</h1>
+        <div class="w-16" style="font-family: 'VT323', monospace; font-size: 1rem; color: rgba(255,253,245,0.7); text-align: right;">
+            {% if session.player_name %}{{ session.player_name }}{% endif %}
+        </div>
     </header>
 
     <!-- Instructions -->
-    <p class="text-center text-gray-500 text-sm py-2 px-4">
-        Tap a square when you find someone who matches it.
+    <p class="text-center text-muted text-sm py-2 px-4" style="font-family: 'VT323', monospace; font-size: 1.1rem; border-bottom: 1px dashed #c4b89a;">
+        TAP A SQUARE WHEN YOU FIND YOUR MATCH_<span class="blink">|</span>
     </p>
 
     <!-- Bingo indicator -->
     {% if session.has_bingo %}
-    <div class="bg-amber-100 text-amber-800 text-center py-2 font-semibold text-sm">
-        🎉 BINGO! You got a line!
+    <div class="text-center py-2 font-semibold" style="background: var(--color-primary); color: #fffdf5; font-family: 'Press Start 2P', monospace; font-size: 0.6rem; letter-spacing: 0.15em; border-bottom: 3px solid #1a1a1a;">
+        *** B-I-N-G-O! YOU GOT A LINE! ***
     </div>
     {% endif %}
 

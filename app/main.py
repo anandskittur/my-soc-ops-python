@@ -1,7 +1,7 @@
 import uuid
 from pathlib import Path
 
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Form, Request, Response
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -37,9 +37,11 @@ async def home(request: Request) -> Response:
 
 
 @app.post("/start", response_class=HTMLResponse)
-async def start_game(request: Request) -> Response:
+async def start_game(
+    request: Request, player_name: str = Form(default="")
+) -> Response:
     session = _get_game_session(request)
-    session.start_game()
+    session.start_game(player_name=player_name)
     return templates.TemplateResponse(
         request, "components/game_screen.html", {"session": session}
     )

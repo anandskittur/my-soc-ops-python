@@ -17,6 +17,7 @@ class GameSession:
     board: list[BingoSquareData] = field(default_factory=list)
     winning_line: BingoLine | None = None
     show_bingo_modal: bool = False
+    player_name: str = ""
 
     @property
     def winning_square_ids(self) -> set[int]:
@@ -26,11 +27,12 @@ class GameSession:
     def has_bingo(self) -> bool:
         return self.game_state == GameState.BINGO
 
-    def start_game(self) -> None:
+    def start_game(self, player_name: str = "") -> None:
         self.board = generate_board()
         self.winning_line = None
         self.game_state = GameState.PLAYING
         self.show_bingo_modal = False
+        self.player_name = player_name
 
     def handle_square_click(self, square_id: int) -> None:
         if self.game_state != GameState.PLAYING:

@@ -1,6 +1,16 @@
 <div class="grid grid-cols-5 gap-1 w-full max-w-md mx-auto aspect-square">
     {% for square in session.board %}
     {% set is_winning = square.id in session.winning_square_ids %}
+    {% if is_winning %}
+        {% set sq_class = "shimmer glow-gold-strong border-gold-bright" %}
+        {% set sq_style = "font-family: 'VT323', monospace; font-size: 0.85rem;" %}
+    {% elif square.is_marked %}
+        {% set sq_class = "bg-accent-gold border-gold glow-gold" %}
+        {% set sq_style = "color: #fffdf5; font-family: 'VT323', monospace; font-size: 0.85rem;" %}
+    {% else %}
+        {% set sq_class = "bg-card border-gold" %}
+        {% set sq_style = "font-family: 'VT323', monospace; font-size: 0.85rem;" %}
+    {% endif %}
     <button
         {% if not square.is_free_space %}
         hx-post="/toggle/{{ square.id }}"
@@ -8,20 +18,18 @@
         hx-swap="outerHTML"
         {% endif %}
         {% if square.is_free_space %}disabled{% endif %}
-        class="relative flex items-center justify-center p-1 text-center border border-gray-300 rounded transition-all duration-150 select-none min-h-[60px] text-xs leading-tight
-        {%- if square.is_marked %}
-            {%- if is_winning %} bg-amber-200 border-amber-400 text-amber-900
-            {%- else %} bg-marked border-marked-border text-green-800
-            {%- endif %}
-        {%- else %} bg-white text-gray-700 active:bg-gray-100
-        {%- endif %}
-        {%- if square.is_free_space %} font-bold text-sm{% endif %}"
+        class="relative flex items-center justify-center p-1 text-center border rounded transition-all duration-150 select-none min-h-[60px] text-xs leading-tight text-white {{ sq_class }}"
+        style="{{ sq_style }}"
         aria-pressed="{{ 'true' if square.is_marked else 'false' }}"
         aria-label="{{ 'Free space' if square.is_free_space else square.text }}">
+        {%- if square.is_free_space -%}
+        <span style="color: var(--color-primary); font-family: 'Press Start 2P', monospace; font-size: 0.6rem; line-height: 1.5;">FREE</span>
+        {%- else -%}
         <span class="wrap-break-word hyphens-auto">{{ square.text }}</span>
-        {% if square.is_marked and not square.is_free_space %}
-        <span class="absolute top-0.5 right-0.5 text-green-600 text-xs">✓</span>
-        {% endif %}
+        {%- if square.is_marked -%}
+        <span class="absolute top-0.5 right-0.5 font-bold" style="color: #fffdf5; font-size: 0.6rem;">OK</span>
+        {%- endif -%}
+        {%- endif %}
     </button>
     {% endfor %}
 </div>
