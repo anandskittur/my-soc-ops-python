@@ -41,8 +41,8 @@ This project uses custom CSS utility classes (similar to Tailwind) defined in `a
 /* Backgrounds */
 .bg-white, .bg-gray-50, .bg-gray-100
 .bg-amber-100, .bg-amber-200
-.bg-accent (primary blue: #2563eb)
-.bg-marked (light green: #dcfce7)
+.bg-accent (primary: #003380 — Prudential navy)
+.bg-marked (marked square: #e6f4ed — soft green)
 .bg-black/50 (semi-transparent overlay)
 /* Text */
 .text-white
@@ -50,6 +50,38 @@ This project uses custom CSS utility classes (similar to Tailwind) defined in `a
 .text-green-600, .text-green-800
 .text-amber-500, .text-amber-800, .text-amber-900
 ```
+
+## Prudential-Inspired Design Tokens
+
+Inferred from prudential.com: deep navy primary, gold CTA accent, white-dominant surfaces, structured professional typography.
+
+When adding new components or restyling, define tokens as CSS variables in `app/static/css/app.css`:
+
+```css
+:root {
+  /* Brand */
+  --color-primary:      #003380;  /* deep navy — buttons, headers */
+  --color-primary-dark: #002060;  /* hover/active */
+  --color-accent:       #f2a900;  /* gold — CTAs, highlights, winning squares */
+  --color-accent-dark:  #d4920a;  /* gold hover */
+
+  /* Surfaces — white-dominant, light gray for cards */
+  --color-bg:           #ffffff;
+  --color-surface:      #f5f7fa;
+  --color-border:       #d0d7e2;
+
+  /* Text */
+  --color-text:         #1a1a2e;  /* near-black body copy */
+  --color-text-muted:   #5a6478;  /* secondary/caption text */
+
+  /* Semantic */
+  --color-success:      #1a7a4a;
+  --color-marked:       #e6f4ed;  /* marked bingo square fill */
+  --color-marked-border:#1a7a4a;
+}
+```
+
+**Typography**: Avoid generic fonts (Inter, Roboto, system-ui). For this aesthetic, prefer `"DM Sans"`, `"Figtree"`, `"Outfit"`, or `"Libre Baskerville"`. Load via Google Fonts in `base.html` `<head>`.
 
 ### Typography
 ```css

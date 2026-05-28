@@ -1,3 +1,26 @@
+/* === Prudential-inspired Design Tokens === */
+:root {
+    /* Brand */
+    --color-primary:       #003380;  /* deep navy */
+    --color-primary-dark:  #002060;  /* hover/active */
+    --color-accent:        #f2a900;  /* gold — CTAs, highlights */
+    --color-accent-dark:   #d4920a;  /* gold hover */
+
+    /* Surfaces */
+    --color-bg:            #ffffff;
+    --color-surface:       #f5f7fa;
+    --color-border:        #d0d7e2;
+
+    /* Text */
+    --color-text:          #1a1a2e;
+    --color-text-muted:    #5a6478;
+
+    /* Semantic */
+    --color-success:       #1a7a4a;
+    --color-marked:        #e6f4ed;
+    --color-marked-border: #1a7a4a;
+}
+
 html,
 body,
 #app {
@@ -6,7 +29,9 @@ body,
 }
 
 body {
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: "DM Sans", "Figtree", system-ui, -apple-system, sans-serif;
+    color: var(--color-text);
+    background-color: var(--color-bg);
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -55,8 +80,10 @@ body {
 .bg-gray-100 { background-color: #f3f4f6; }
 .bg-amber-100 { background-color: #fef3c7; }
 .bg-amber-200 { background-color: #fde68a; }
-.bg-accent { background-color: #2563eb; }
-.bg-marked { background-color: #dcfce7; }
+.bg-accent { background-color: var(--color-primary); }
+.bg-accent-gold { background-color: var(--color-accent); }
+.bg-marked { background-color: var(--color-marked); }
+.bg-surface { background-color: var(--color-surface); }
 .bg-black\/50 { background-color: rgba(0, 0, 0, 0.5); }
 
 .text-white { color: #ffffff; }
@@ -89,7 +116,8 @@ body {
 .border-gray-200 { border-color: #e5e7eb; }
 .border-gray-300 { border-color: #d1d5db; }
 .border-amber-400 { border-color: #fbbf24; }
-.border-marked-border { border-color: #22c55e; }
+.border-marked-border { border-color: var(--color-marked-border); }
+.border-primary { border-color: var(--color-primary); }
 
 .rounded { border-radius: 0.25rem; }
 .rounded-lg { border-radius: 0.5rem; }
@@ -118,7 +146,7 @@ body {
 .duration-150 { transition-duration: 150ms; }
 
 button:active .active\:bg-gray-100 { background-color: #f3f4f6; }
-button:active .active\:bg-accent-light { background-color: #3b82f6; }
+button:active .active\:bg-accent-light { background-color: var(--color-primary-dark); }
 
 button {
     cursor: pointer;
